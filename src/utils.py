@@ -1,8 +1,4 @@
-from config import (INDEX_PATH, 
-                    DATA_FOLDER, 
-                    TICKERS_PATH, 
-                    API_URL, 
-                    API_KEY)
+from config import GLobalConfig
 import time
 import os
 from typing import Dict, List, Tuple
@@ -11,23 +7,23 @@ import requests
 from pprint import pprint
 def get_index() -> int:
     index = None
-    with open(INDEX_PATH, mode="r") as file:
+    with open(GLobalConfig.INDEX_PATH, mode="r") as file:
         index = file.read()
         index = int(index)
     return index
 
 def save_index(index: int):
-    with open(INDEX_PATH, mode="w") as file:
+    with open(GLobalConfig.INDEX_PATH, mode="w") as file:
         file.write(str(index))
 
 def save_result(index: int, ticker: str, result: Dict):
-    path = os.path.join(DATA_FOLDER, str(index) + "_" + ticker + ".json")
+    path = os.path.join(GLobalConfig.DATA_FOLDER, str(index) + "_" + ticker + ".json")
     with open(path, mode="w") as file:
         json.dump(result, file, indent=4)
     print(f"Saved result to {path}")
 
 def get_tickers(task_owner: str="Loi"):
-    with open(TICKERS_PATH, mode="r") as file:
+    with open(GLobalConfig.TICKERS_PATH, mode="r") as file:
         data: Dict = json.load(file)
         tickers = data.get(task_owner)
     index = get_index()
@@ -39,11 +35,11 @@ def pull_data():
         try:
             ticker = params.get("ticker")
             params = {"date": params.get("date")}
-            params.update({"apiKey": API_KEY})
+            params.update({"apiKey": GLobalConfig.API_KEY})
             headers = {
                 "Content-Type": "application/json"
             }
-            url = API_URL+f"/{ticker}"
+            url = GLobalConfig.API_URL+f"/{ticker}"
 
             res: Dict = requests.get(url=url, 
                                     headers=headers, 
