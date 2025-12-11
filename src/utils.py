@@ -31,7 +31,11 @@ def get_tickers(task_owner: str="Loi"):
 
 def pull_data():
     index, list_params = get_tickers()
+    start_idx = int(os.environ.get("START_INDEX"))
+    end_idx = int(os.environ.get("END_INDEX"))
     for idx, params in enumerate(list_params):
+        if idx + start_idx == end_idx:
+            return
         try:
             ticker = params.get("ticker")
             params = {"date": params.get("date")}

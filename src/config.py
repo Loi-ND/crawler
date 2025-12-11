@@ -9,5 +9,5 @@ class GLobalConfig:
     def init(self):
         self.API_KEY = os.environ.get("API_KEY")
         with open(self.INDEX_PATH, mode="w") as file:
-            index = os.environ.get("INDEX")
+            index = os.environ.get("START_INDEX")
             file.write(index)
