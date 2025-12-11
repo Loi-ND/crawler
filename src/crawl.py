@@ -1,4 +1,5 @@
 from config import GLobalConfig
+from utils import pull_data
 import os
 
 GLobalConfig.init(GLobalConfig)
