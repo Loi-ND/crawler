@@ -1,3 +1,6 @@
-from utils import pull_data
+from config import GLobalConfig
+import os
 
-pull_data()
+GLobalConfig.init(GLobalConfig)
+print(f"API_KEY: {GLobalConfig.API_KEY}")
+print(f"Start index: {os.environ.get("INDEX")}")
