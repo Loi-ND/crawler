@@ -50,8 +50,11 @@ def pull_data():
                                     params=params).json()
             result = res.get("results")
             if result != None:
+                print("data retrieved successfully!")
                 save_result(index=idx+index, ticker=ticker, result=result)
                 save_index(index=idx+1+index)
+            else:
+                print("Your request has refused!")
         except Exception as e:
             print(f"Error while fetching data -> {e}")
         time.sleep(13)
