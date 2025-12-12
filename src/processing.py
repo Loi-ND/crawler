@@ -26,4 +26,3 @@ with open("../labels/stock-analystics.company_infos.json", mode="r", encoding="u
     tickers["Loi"] = params[(lenght//2):]
     with open("../labels/tickers.json", mode="w") as file:
         json.dump(tickers, file, indent=4)
-    

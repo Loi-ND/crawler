@@ -49,8 +49,9 @@ def pull_data():
                                     headers=headers, 
                                     params=params).json()
             result = res.get("results")
-            save_result(index=idx+index, ticker=ticker, result=result)
-            save_index(index=idx+1+index)
+            if result != None:
+                save_result(index=idx+index, ticker=ticker, result=result)
+                save_index(index=idx+1+index)
         except Exception as e:
             print(f"Error while fetching data -> {e}")
         time.sleep(13)
